@@ -81,13 +81,13 @@ export class Greeting{
     this.titleEl = Tag.build({
       tagName: 'h2',
       classes: ['greeting-page__title'],
-      text: this._title,
+      inner: this._title,
     })
   
     this.messageEl = Tag.build({
       tagName: 'p',
       classes: ['greeting-page__message'],
-      text: this._message,
+      inner: this._message,
   
     })
 
@@ -99,14 +99,14 @@ export class Greeting{
 
     const resumeBtn = Tag.build({
       tagName: 'button',
-      classes: ['greeting-page__resume', 'btn-reset'],
+      classes: ['greeting-page__btn', 'greeting-page__btn--resume',  'btn-reset'],
       attributes: {type: 'button'},
       text: 'Resume'
     })
 
     const newGameBtn = Tag.build({
       tagName: 'button',
-      classes: ['greeting-page__new-game', 'btn-reset'],
+      classes: ['greeting-page__btn','greeting-page__btn--new-game',  'btn-reset'],
       attributes: {type: 'button'},
       text: 'New game'
     })
@@ -123,8 +123,8 @@ export class Greeting{
   }
 
   update() {
-    this.titleEl.textContent = this.title;
-    this.messageEl.textContent = this.message;
+    this.titleEl.innerHTML = this.title;
+    this.messageEl.innerHTML = this.message;
   }
 }
 

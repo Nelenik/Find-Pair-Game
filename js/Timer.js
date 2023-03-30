@@ -75,6 +75,7 @@ export class Timer {
     this.isRunning = true;
   }
 
+
   tick() {
     if (this.currentTime <= 1) {
       this.currentTime = 0;

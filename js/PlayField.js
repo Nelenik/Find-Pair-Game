@@ -37,6 +37,7 @@ export class PlayField {
         instance.success = null;
       },
       onGoingToMenu: (instance) => {
+        if(this.timer) this.timer.pause();
         this.homePage.isActive = true;
         instance.isActive = false;
         instance.success = null;
@@ -86,7 +87,7 @@ export class PlayField {
       },
       onGameOver: (moves) => {
         if (this.timer) this.timer.pause();
-        this.activateGreetingField('Поздравляю, хорошая игра!', `Количество ходов - ${moves}. Пора закрепить результат!`, true)
+        this.activateGreetingField('Вы выиграли!', `Количество ходов - ${moves}.<br>Закрепим результат?`, true)
       }
     })
   }
@@ -132,6 +133,7 @@ export class PlayField {
     });
 
     newGameBtn.addEventListener('click', (e) => {
+      if(this.timer) this.timer.isRunning = false;
       this.homePage.isActive = true
     })
 
@@ -159,7 +161,7 @@ export class PlayField {
       container: timerBlock,
       min: this._time,
       onTimeOut: () => {
-        this.activateGreetingField('Увы, время закончилось', 'Но вы можете сыграть еще раз!', false)
+        this.activateGreetingField('Увы, время закончилось...', 'Но вы можете сыграть еще раз!', false)
       }
     })
     this.bar.prepend(timerBlock);

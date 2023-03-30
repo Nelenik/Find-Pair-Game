@@ -54,11 +54,9 @@ p {
 img {
   object-fit: cover;
   max-width: 100%;
-  /* height: auto; */
 }
 
 body {
-  /* min-width: 320px; */
   overflow: hidden;
   height: 100vh;
   font-family: 'Lato', sans-serif;
@@ -126,7 +124,7 @@ body {
     align-items: center;
     background-image: url('../img/drawing-cat.png');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: top center;
   }
 
@@ -135,7 +133,6 @@ body {
     margin-bottom: 10px;
     font-family: "GoneHills";
     font-size: clamp(2rem, 3vw + 1.4rem, 5rem);
-    // font-size: 50px;
     color: #315424;
     text-shadow: 3px 2px 3px rgba(142, 150, 149, 1);
   }
@@ -196,6 +193,10 @@ body {
     color: rgba(49, 84, 36, 1);
     font-size: 1rem;
     transition: border-color 0.3s linear, transform 0.3s linear;
+
+    @media (max-width: 576px) {
+      padding: 0 10px;
+    }
 
     &:focus-visible,
     &:hover:not(:focus-visible) {
@@ -304,7 +305,6 @@ body {
 /*********** Play-Field ***********/
 // игровое поле
 .pairs-field {
-
   &__bar {}
 
   &__list {
@@ -340,7 +340,6 @@ body {
 
   &__timer-wrap {
     flex-grow: 1;
-    // margin-right: auto;
     display: flex;
 
   }
@@ -363,7 +362,7 @@ body {
     padding: 10px 20px;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 5px;
-    box-shadow: 0px 0px 6px 2px rgba(88, 150, 66, 1);
+    box-shadow: 0px 0px 6px 2px #537845;
     font: inherit;
     color: rgb(45, 82, 32);
 
@@ -498,7 +497,6 @@ body {
 
     .card__back {
       animation: changeBorder 0.6s linear 0.6s forwards;
-      // border-color:  #589642;
     }
 
   }
@@ -541,30 +539,93 @@ body {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: rgba(232, 227, 215, 0.4);
+  background-color: rgba(237, 243, 228, 0.7);
   opacity: 0;
   visibility: hidden;
   transform: scale(0);
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 
   &__content-wrap {
-    width: min(100%, 350px);
-    aspect-ratio: 1/0.7;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 150px 0 150px min(10%, 100px);
+    width: min(100%, 800px);
+    aspect-ratio: 1.2/1;
     background-repeat: no-repeat;
-    background-size: 20% 20%;
+    background-size: 20% 20%, contain;
+    background-position: bottom 30% right 10%, center center;
 
+    @media (max-width: 650px) {
+      gap: 20px;
+    }
 
+    @media (max-width: 576px) {
+      gap: 15px;
+      padding-top: 100px;
+      padding-bottom: 100px;
+      background-size: 15% 15%, contain;
+    }
   }
 
-  &__title {}
+  &__title {
+    margin: 0;
+    width: 50%;
+    font-size: clamp(1.1rem, 5.2vw + 0.1rem, 3rem);
+    color: #2b4621;
+  }
 
-  &__message {}
+  &__message {
+    margin: 0;
+    max-width: 250px;
+    font-size: clamp(0.7rem, 2.2vw + 0.3rem, 1.5rem);
+    font-weight: 600;
+    line-height: 150%;
+    color: #2b4621;
+  }
 
-  &__btn-wrap {}
+  &__btn-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 30px;
 
-  &__resume {}
+    @media (max-width: 650px) {
+      gap: 10px;
+    }
+  }
 
-  &__new-game {}
+  &__btn {
+    padding: 7px 15px;
+    min-width: 120px;
+    background-color: rgb(191 212 158);
+    box-shadow: inset 1px 1px 7px 2px rgba(49, 84, 36, 1);
+    border-radius: 20px;
+    color: #315424;
+    font-size: clamp(0.7rem, 2.2vw + 0.3rem, 1.5rem);
+    font-weight: 700;
+    outline: none;
+    transition: color 0.3s linear, background-color 0.3s linear, transform 0.3s linear;
+
+    @media(max-width: 576px) {
+      padding: 3px 10px;
+      min-width: 70px;
+    }
+
+    &:hover:not(:focus-visible),
+    &:focus-visible {
+      color: #ffffff;
+      background-color: #4c743d;
+      transform: translateY(-5px);
+    }
+
+    &--resume {}
+
+    &--new-game {}
+  }
+
+
 
   &--active {
     z-index: 100;
@@ -575,21 +636,133 @@ body {
 
   &--success {
     .greeting-page__content-wrap {
-      background-image: url("../img/smile-poz.svg");
-      background-position: bottom 50% right;
-      @media (max-width: 400px) {
-        background-position: bottom 30% right;
-      }
+      background-image: url("../img/smile-poz.svg"), url('../img/greet-bg.svg');
     }
   }
 
   &--failed {
     .greeting-page__content-wrap {
-      background-image: url('../img/smile-sad.svg');
-      background-position: bottom 50% right;
-      @media (max-width: 400px) {
-        background-position: bottom 30% right;
-      }
+      background-image: url('../img/smile-sad.svg'), url('../img/greet-bg.svg');
     }
   }
+}
+
+/**************Preload****************/
+@keyframes ldio-1aisnhjdnn7-1 {
+  0% {
+    transform: rotate(0deg)
+  }
+
+  50% {
+    transform: rotate(-45deg)
+  }
+
+  100% {
+    transform: rotate(0deg)
+  }
+}
+
+@keyframes ldio-1aisnhjdnn7-2 {
+  0% {
+    transform: rotate(180deg)
+  }
+
+  50% {
+    transform: rotate(225deg)
+  }
+
+  100% {
+    transform: rotate(180deg)
+  }
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(2) {
+  transform: translate(-15px, 0);
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(2) div {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 120px;
+  height: 60px;
+  border-radius: 120px 120px 0 0;
+  background: #bfd49e;
+  animation: ldio-1aisnhjdnn7-1 1.5384615384615383s linear infinite;
+  transform-origin: 60px 60px
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(2) div:nth-child(2) {
+  animation: ldio-1aisnhjdnn7-2 1.5384615384615383s linear infinite
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(2) div:nth-child(3) {
+  transform: rotate(-90deg);
+  animation: none;
+}
+
+@keyframes ldio-1aisnhjdnn7-3 {
+  0% {
+    transform: translate(190px, 0);
+    opacity: 0
+  }
+
+  20% {
+    opacity: 1
+  }
+
+  100% {
+    transform: translate(70px, 0);
+    opacity: 1
+  }
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(1) {
+  display: block;
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(1) div {
+  position: absolute;
+  top: 92px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #315424;
+  animation: ldio-1aisnhjdnn7-3 1.5384615384615383s linear infinite
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(1) div:nth-child(1) {
+  animation-delay: -0.43550000000000005s
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(1) div:nth-child(2) {
+  animation-delay: -0.21450000000000002s
+}
+
+.ldio-1aisnhjdnn7>div:nth-child(1) div:nth-child(3) {
+  animation-delay: 0s
+}
+
+.loadingio-spinner-bean-eater-5embbz7qgfc {
+  position: absolute;
+  inset: 0;
+  display: inline-block;
+  overflow: hidden;
+  background: white;
+}
+
+.ldio-1aisnhjdnn7 {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.ldio-1aisnhjdnn7 div {
+  box-sizing: content-box;
 }

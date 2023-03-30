@@ -102,6 +102,7 @@ export class HomePage {
   createTimeSelect() {
     const timeOptions = [
       new Option('Не на время', ''),
+      new Option('30 сек', '0.5'),
       new Option('1 мин', '1'),
       new Option('2 мин', '2'),
       new Option('3 мин', '3'),
