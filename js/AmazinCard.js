@@ -7,7 +7,7 @@ export class AmazingCard extends Card {
     this.card.dataset.cardNumber = `${value}`;
     const cardBackImg = document.createElement('img');
     cardBackImg.classList.add('card__back');
-    new Promise((resolve, reject) => {
+    this._imgPromise = new Promise((resolve, reject) => {
       cardBackImg.src = `./img/amazing-cards/${value}.jpg`;
       cardBackImg.addEventListener('load', resolve)
       cardBackImg.addEventListener('error', () => {
@@ -26,5 +26,9 @@ export class AmazingCard extends Card {
   }
   get cardNumber() {
     return this._cardNumber;
+  }
+
+  get imgPromise() {
+    return this._imgPromise;
   }
 }

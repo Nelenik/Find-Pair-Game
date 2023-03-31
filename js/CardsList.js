@@ -47,30 +47,30 @@ export class CardsList {
     if (value) {
       this.getRandomArray(halfOfCards, 1, 50);
       this.shuffle();
-      this._cardsNumbers.forEach(el => {
-        let card = new AmazingCard({
-          container: this.list,
-          cardNumber: el,
-          flip: this.flip.bind(this)
+      const cards = this._cardsNumbers.map((el) => new AmazingCard({
+        container: this.list,
+        cardNumber: el,
+        flip: this.flip.bind(this)
+      }))
+      Promise.all(cards.map((card) => card.imgPromise))
+        .then(() => {
+          this._cardList = cards;
+          if (this.afterCardsCreating) {
+            this.afterCardsCreating(this._cardList)
+          }
         })
-        this._cardList.push(card)
-      })
     } else {
       this.getOrderedArray(halfOfCards);
       this.shuffle();
-      this._cardsNumbers.forEach(el => {
-        let card = new Card({
-          container: this.list,
-          cardNumber: el,
-          flip: this.flip.bind(this)
-        })
-
-        this._cardList.push(card)
-
-      })
-    }
-    if (this.afterCardsCreating) {
-      this.afterCardsCreating(this._cardList)
+      this._cardList = this._cardsNumbers.map(el => new Card({
+        container: this.list,
+        cardNumber: el,
+        flip: this.flip.bind(this)
+      }))
+      null;
+      if (this.afterCardsCreating) {
+        this.afterCardsCreating(this._cardList)
+      }
     }
   }
 
@@ -144,6 +144,7 @@ export class CardsList {
     setTimeout(() => {
       this.cardsPerRow = this.cardsPerRow;
       this.mode = this.mode;
+      this.cardsPromise = this.cardsPromise;
     }, delay)
   }
 }

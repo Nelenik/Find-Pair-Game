@@ -10,12 +10,12 @@ import { Tag, CheckCallback } from "./_helpers.js";
 export class Timer {
 
   constructor(options) {
-    const { container, min, onTimeOut } = options
+    const { container, min, onTimeOut, isRunning = true } = options
     this.container = container;
     this.createTimerWrapper();
     this.onTimeOut = CheckCallback.check(onTimeOut);
     this.startTime = min || '1';
-    this.isRunning = true;
+    this.isRunning = isRunning;
   }
 
   createTimerWrapper() {

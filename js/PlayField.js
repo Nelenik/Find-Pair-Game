@@ -25,9 +25,9 @@ export class PlayField {
     const { cardsPerRow, mode, time, homePage } = formSettings;
     this.container = container;
     this.createField();
-    this.time = time;
     this.mode = mode;
     this.cardsPerRow = cardsPerRow;
+    this.time = time;
     this.homePage = homePage;
     this.greetingField = new Greeting({
       container: document.body,
@@ -37,7 +37,7 @@ export class PlayField {
         instance.success = null;
       },
       onGoingToMenu: (instance) => {
-        if(this.timer) this.timer.pause();
+        if (this.timer) this.timer.pause();
         this.homePage.isActive = true;
         instance.isActive = false;
         instance.success = null;
@@ -52,6 +52,19 @@ export class PlayField {
     });
     this.container.append(this.field);
 
+  }
+
+  set time(value) {
+    this._time = value;
+    if (this.bar) this.bar.remove();
+    this.createControlBar();
+    if (value) {
+      this.createTimerBlock()
+    }
+  }
+
+  get time() {
+    return this._time
   }
 
   set mode(value) {
@@ -96,19 +109,6 @@ export class PlayField {
     return this._cardsPerRow
   }
 
-  set time(value) {
-    this._time = value;
-    if (this.bar) this.bar.remove();
-    this.createControlBar();
-    if (value) {
-      this.createTimerBlock()
-    }
-  }
-
-  get time() {
-    return this._time
-  }
-
   createControlBar() {
     const bar = Tag.build({
       tagName: 'div',
@@ -133,7 +133,7 @@ export class PlayField {
     });
 
     newGameBtn.addEventListener('click', (e) => {
-      if(this.timer) this.timer.isRunning = false;
+      if (this.timer) {this.timer.pause()}
       this.homePage.isActive = true
     })
 
