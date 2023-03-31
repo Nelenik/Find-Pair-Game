@@ -1,8 +1,7 @@
-import { Tag, CheckCallback } from "./_helpers.js";
+import { Tag } from "./_helpers.js";
 import { CardsList } from "./CardsList.js";
 import { Timer } from "./Timer.js";
 import { Greeting } from "./GreetingPage.js";
-// import { HomePage } from "./HomePage.js";
 
 /*formSettings = {(данные с формы настроек)
   cardsPerRow,
@@ -78,6 +77,7 @@ export class PlayField {
   set cardsPerRow(value) {
     if (this.cardList) this.cardList.list.remove()
     this._cardsPerRow = value;
+    console.log(this.timer)
     this.cardList = new CardsList({
       container: this.field,
       mode: this._mode,
@@ -131,9 +131,8 @@ export class PlayField {
     restartBtn.addEventListener('click', (e) => {
       this.updateField()
     });
-
     newGameBtn.addEventListener('click', (e) => {
-      if (this.timer) {this.timer.pause()}
+      if (this.timer) { this.timer.pause() }
       this.homePage.isActive = true
     })
 
@@ -153,15 +152,17 @@ export class PlayField {
       inner: this._controlsInners.pauseInner,
     });
     this.toggleBtn.addEventListener('click', (e) => {
+      this.cardList.isClickable = !this.cardList.isClickable;
       this.timer.isRunning = !this.timer.isRunning
       this.toggleBtn.innerHTML = this.timer.isRunning ? this._controlsInners.pauseInner : this._controlsInners.playInner;
     });
     timerBlock.append(this.toggleBtn)
     this.timer = new Timer({
       container: timerBlock,
+      // isRunning: false,
       min: this._time,
       onTimeOut: () => {
-        this.activateGreetingField('Увы, время закончилось...', 'Но вы можете сыграть еще раз!', false)
+          this.activateGreetingField('Увы, время закончилось...', 'Но вы можете сыграть еще раз!', false)
       }
     })
     this.bar.prepend(timerBlock);
@@ -171,6 +172,7 @@ export class PlayField {
     if (this.timer) {
       this.timer.reset();
       this.toggleBtn.innerHTML = this._controlsInners.pauseInner;
+      this.cardList.isClickable = true;
     }
     this.cardList.update()
   }

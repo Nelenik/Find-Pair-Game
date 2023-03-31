@@ -172,7 +172,7 @@ body {
   text-shadow: 3px 5px 4px rgba(255, 255, 255, 1);
 
   @media (max-width: 576px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   &__label {
@@ -247,6 +247,10 @@ body {
 .checkbox {
   font-size: 1.2rem;
 
+  @media (max-width: 576px) {
+    font-size: 1rem;
+  }
+
   &__def {
     position: absolute;
     appearance: none;
@@ -283,7 +287,7 @@ body {
     box-shadow: inset 1px 1px 7px 2px rgba(49, 84, 36, 1);
     border-radius: 20px;
     left: 0;
-    transition: outline 0.3s linear, background-color 0.3s linear;
+    transition: outline 0.2s linear, background-color 0.2s linear;
   }
 
   &__custom::after {
@@ -298,7 +302,7 @@ body {
     z-index: 10;
     background-color: white;
     box-shadow: inset 0px 0px 2px 1px rgba(49, 84, 36, 1);
-    transition: transform 0.3s linear;
+    transition: transform 0.2s linear;
   }
 }
 
@@ -555,7 +559,7 @@ body {
     aspect-ratio: 1.2/1;
     background-repeat: no-repeat;
     background-size: 20% 20%, contain;
-    background-position: bottom 30% right 10%, center center;
+    background-position: bottom 35% right 15%, center center;
 
     @media (max-width: 650px) {
       gap: 20px;

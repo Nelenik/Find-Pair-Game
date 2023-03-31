@@ -163,7 +163,7 @@ body {
 }
 @media (max-width: 576px) {
   .settings-form {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
 .settings-form__label {
@@ -225,6 +225,11 @@ body {
 .checkbox {
   font-size: 1.2rem;
 }
+@media (max-width: 576px) {
+  .checkbox {
+    font-size: 1rem;
+  }
+}
 .checkbox__def {
   position: absolute;
   -webkit-appearance: none;
@@ -257,7 +262,7 @@ body {
   box-shadow: inset 1px 1px 7px 2px rgb(49, 84, 36);
   border-radius: 20px;
   left: 0;
-  transition: outline 0.3s linear, background-color 0.3s linear;
+  transition: outline 0.2s linear, background-color 0.2s linear;
 }
 .checkbox__custom::after {
   content: "";
@@ -271,7 +276,7 @@ body {
   z-index: 10;
   background-color: white;
   box-shadow: inset 0px 0px 2px 1px rgb(49, 84, 36);
-  transition: transform 0.3s linear;
+  transition: transform 0.2s linear;
 }
 
 /*********** Play-Field ***********/
@@ -500,7 +505,7 @@ body {
   aspect-ratio: 1.2/1;
   background-repeat: no-repeat;
   background-size: 20% 20%, contain;
-  background-position: bottom 30% right 10%, center center;
+  background-position: bottom 35% right 15%, center center;
 }
 @media (max-width: 650px) {
   .greeting-page__content-wrap {

@@ -8,7 +8,8 @@ import { AmazingCard } from "./AmazinCard.js";
   mode: false(numbers, def)/true(img)
   onGameOver: ()=>{}
   onUpdate: (cardList)=>{}(делаем что то при обновлении списка, принимает массив с экземплярами карт)
-  afterCardsCreating: (cardList) => {вызывается после создания карточек}
+  afterCardsCreating: (cardList) => {вызывается после создания карточек},
+  isClickable: true/false (делает список карточек кликабельным/некликабельным)
 } */
 
 
@@ -18,9 +19,10 @@ export class CardsList {
   _moves = 0
 
   constructor(options) {
-    const { container, cardsPerRow, mode, onGameOver, onUpdate, afterCardsCreating } = options;
+    const { container, cardsPerRow, mode, onGameOver, onUpdate, afterCardsCreating, isClickable = true } = options;
     this.container = container;
     this.createCardsList();
+    this.isClickable = isClickable;
     this.afterCardsCreating = CheckCallback.check(afterCardsCreating);
     this.cardsPerRow = cardsPerRow || 4;
     this.mode = mode || false;
@@ -35,6 +37,14 @@ export class CardsList {
     })
     this.list = list;
     this.container.append(this.list)
+  }
+
+  set isClickable(value) {
+    this._isClickable = value;
+    value ? this.list.style.pointerEvents = '' : this.list.style.pointerEvents = 'none'
+  }
+  get isClickable() {
+    return this._isClickable;
   }
   // сеттер режима игры, в зависимости от режима создает карточки с цифрами или с изображениями
   set mode(value) {
@@ -67,7 +77,6 @@ export class CardsList {
         cardNumber: el,
         flip: this.flip.bind(this)
       }))
-      null;
       if (this.afterCardsCreating) {
         this.afterCardsCreating(this._cardList)
       }

@@ -34,3 +34,37 @@ export class CheckCallback{
     }
   }
 }
+
+const promisesCache = new Map()
+export function loadResource(src) {
+  if (!src) return src;
+  if (src.endsWith('.css')) {
+    if (!promisesCache.has(src)) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = src;
+
+      const cssPromise = new Promise(resolve => {
+        link.addEventListener('load', () => {
+          resolve()
+        })
+      })
+      promisesCache.set(src, cssPromise)
+      document.head.append(link)
+    }
+    return promisesCache.get(src);
+  }
+  if (/.png|.jpg|.webp|.svg?/gi.test(src)) {
+    if (!promisesCache.has(src)) {
+      const imagePromise = new Promise((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.addEventListener('load', () => {
+          resolve(img);
+        });
+      });
+      promisesCache.set(src, imagePromise);
+    }
+    return promisesCache.get(src);
+  }
+}
